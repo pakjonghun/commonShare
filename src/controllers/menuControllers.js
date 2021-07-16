@@ -1,4 +1,4 @@
-import client from "../../client";
+import client from "../client";
 
 export const menuSearch = async (req, res) => {
   try {

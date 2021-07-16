@@ -1,6 +1,6 @@
 import cheerio from "cheerio";
 import axios from "axios";
-import client from "../client";
+import client from "./client";
 
 export const insertIcecream = async (cate, title, image, hashTags = []) => {
   const connectOrCreate = [];

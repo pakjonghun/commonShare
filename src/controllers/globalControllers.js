@@ -1,7 +1,7 @@
-import client from "../../client";
 import Joi from "joi";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import client from "../client";
 
 export const login = async (req, res) => {
   try {

@@ -3,13 +3,8 @@ import express from "express";
 import globalRouter from "./routers/globalRouter";
 import menuRouter from "./routers/menuRouter";
 import aboutRouter from "./routers/aboutRouter";
-import {
-  getIcecream,
-  getInstar,
-  handleGetEditIcecream,
-  insertIcecream,
-} from "./api";
-import client from "../client";
+import { getIcecream, handleGetEditIcecream, insertIcecream } from "./api";
+import client from "./client";
 
 const app = express();
 
