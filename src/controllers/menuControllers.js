@@ -55,7 +55,7 @@ export const icecreamList = async (req, res) => {
     const { page } = req.params;
     const icecreams = await client.icecream.findMany({
       take: 20,
-      skip: 20 * (page - 1),
+      skip: page ? 20 * (page - 1) : 0,
     });
     res.json({
       ok: true,
