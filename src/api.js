@@ -113,9 +113,7 @@ export const getInstar = async () => {
       "#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div "
     ).children("div");
 
-    bodyList.each((index, item) => {
-      console.log(index);
-    });
+    bodyList.each((index, item) => {});
 
     // console.log(bodyList);
     // console.log(bodyList.find("div > div > div").children("img").length);

@@ -10,7 +10,12 @@ import {
   insertIcecream,
 } from "./api";
 import client from "./client";
-import { icecreamDetail, iceCreams, searchIceCream } from "../clientApi";
+import {
+  icecreamAll,
+  icecreamDetail,
+  iceCreams,
+  searchIceCream,
+} from "../clientApi";
 
 const app = express();
 
@@ -23,7 +28,7 @@ app.use("/about", aboutRouter);
 const port = process.env.PORT || 4000;
 
 const getData = async () => {
-  const a = await icecreamDetail();
+  const a = await icecreamAll();
   console.log(a);
   await client.icecream.deleteMany({});
   await client.allergy.deleteMany({});

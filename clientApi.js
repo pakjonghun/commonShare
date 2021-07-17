@@ -17,5 +17,6 @@ export const icecreamSearch = async () =>
 
 export const icecreamDetail = async () => {
   const keyword = encodeURIComponent("꿀초코");
-  instance.get(`menu/icecream/${keyword}`);
+  console.log(keyword);
+  return instance.get(`menu/icecream/${keyword}`);
 };
