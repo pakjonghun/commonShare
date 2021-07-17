@@ -39,7 +39,7 @@ export const login = async (req, res) => {
 
 export const join = async (req, res) => {
   try {
-    const { id, nickname, email, password, confirmPassword } = req.body;
+    const { id, nickname, email, password, passwordconfirm } = req.body;
 
     if (password.includes(id)) {
       return res.json({
@@ -59,7 +59,7 @@ export const join = async (req, res) => {
 
     const { value, error } = schema.validate({ id, nickname, email, password });
 
-    if (password !== confirmPassword) {
+    if (password !== passwordconfirm) {
       return res.json({ ok: false, error: "비밀번호를 다시 확인하세요" });
     }
 

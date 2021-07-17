@@ -1,8 +1,23 @@
 import client from "../client";
 
+const selection = {
+  hashTags: {
+    select: {
+      hashtag: true,
+    },
+  },
+  title: true,
+  image: true,
+  allergy: {
+    select: {
+      allergy: true,
+    },
+  },
+};
+
 export const menuSearch = async (req, res) => {
   try {
-    const { keyword, hashtag, select, page } = req.body;
+    const { keyword, hashtag, select = [], page } = req.body;
     let data;
 
     if (hashtag) {
@@ -10,16 +25,26 @@ export const menuSearch = async (req, res) => {
         take: 7,
         skip: page ? 7 * (page - 1) : 0,
         where: { hashTags: { some: { hashtag } } },
+        select: selection,
       });
-
       return res.json({ ok: true, data });
     }
 
+    const OR = [];
+    if (select.length) {
+      for (let item of select) {
+        OR.push({ allergy: item });
+      }
+    }
+
     data = await client.icecream.findMany({
+      take: 7,
+      skip: page ? 7 * (page - 1) : 0,
       where: {
         title: { contains: keyword },
-        allergy: { some: { allergy: select } },
+        ...(OR.length && { allergy: { some: { OR } } }),
       },
+      select: selection,
     });
 
     return res.json({ ok: true, data });
@@ -34,11 +59,11 @@ export const menuSearch = async (req, res) => {
 
 export const icecreamDetail = async (req, res) => {
   try {
-    const { id } = req.params;
-    console.log(id);
+    const { title } = req.params;
 
     const data = await client.icecream.findUnique({
-      where: { id: Number(id) },
+      select: selection,
+      where: { title },
     });
     return res.json({ ok: true, data });
   } catch (e) {
@@ -56,6 +81,7 @@ export const icecreamList = async (req, res) => {
     const icecreams = await client.icecream.findMany({
       take: 20,
       skip: page ? 20 * (page - 1) : 0,
+      select: selection,
     });
     res.json({
       ok: true,
