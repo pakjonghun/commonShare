@@ -99,3 +99,12 @@ export const join = async (req, res) => {
     };
   }
 };
+
+export const myPage = async (req, res) => {
+  const user = res.locals.user;
+  if (!user) {
+    return res.json({ ok: false, error: "로그인 하세요." });
+  }
+
+  return res.json({ ok: true, data: user });
+};

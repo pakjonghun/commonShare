@@ -34,22 +34,17 @@ model Icecream {
   title     String   @unique
   image     String
 
-  allergy Allergy[]
-
-
-  hashTags HashTag[]
-
+  allergy    Allergy[]
+  hashTags   HashTag[]
   Category   Category? @relation(fields: [categoryId], references: [id])
   categoryId Int?
-
 }
 
 model HashTag {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  hashtag   String   @unique
-
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  hashtag   String     @unique
   icecreams Icecream[]
 }
 

@@ -5,9 +5,15 @@ import menuRouter from "./routers/menuRouter";
 import aboutRouter from "./routers/aboutRouter";
 import { getIcecream, handleGetEditIcecream, insertIcecream } from "./api";
 import client from "./client";
+import cors from "cors";
+import { authMiddleWare } from "./middleWare";
 
 const app = express();
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/menu", menuRouter);
