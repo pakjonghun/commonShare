@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/menu", menuRouter);
 app.use("/api", globalRouter);
-app.use("/about", aboutRouter);
+app.use("/review", aboutRouter);
 
 const port = process.env.PORT || 4000;
 
