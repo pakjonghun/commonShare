@@ -8,7 +8,7 @@ export const menuSearch = async (req, res) => {
     if (hashtag) {
       data = await client.icecream.findMany({
         take: 7,
-        skip: 7 * (page - 1),
+        skip: page ? 7 * (page - 1) : 0,
         where: { hashTags: { some: { hashtag } } },
       });
 
