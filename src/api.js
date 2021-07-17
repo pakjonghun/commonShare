@@ -104,3 +104,28 @@ export const handleGetEditIcecream = async () => {
   }
   return editIcreamData;
 };
+
+export const getInstar = async () => {
+  try {
+    const res = await axios.get("http://www.baskinrobbins.co.kr/");
+    const $ = cheerio.load(res.data);
+    const bodyList = $(
+      "#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div "
+    ).children("div");
+
+    bodyList.each((index, item) => {
+      console.log(index);
+    });
+
+    // console.log(bodyList);
+    // console.log(bodyList.find("div > div > div").children("img").length);
+
+    // bodyList.each((index, item) => {
+    //   console.log(index);
+    //   const className = $(this).find("# div > div > div > img").attr("src");
+    //   console.log(className);
+    // });
+  } catch (e) {
+    console.log(e);
+  }
+};

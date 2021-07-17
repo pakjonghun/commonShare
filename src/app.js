@@ -3,8 +3,14 @@ import express from "express";
 import globalRouter from "./routers/globalRouter";
 import menuRouter from "./routers/menuRouter";
 import aboutRouter from "./routers/aboutRouter";
-import { getIcecream, handleGetEditIcecream, insertIcecream } from "./api";
+import {
+  getIcecream,
+  getInstar,
+  handleGetEditIcecream,
+  insertIcecream,
+} from "./api";
 import client from "./client";
+import { icecreamDetail, iceCreams, searchIceCream } from "../clientApi";
 
 const app = express();
 
@@ -17,6 +23,8 @@ app.use("/about", aboutRouter);
 const port = process.env.PORT || 4000;
 
 const getData = async () => {
+  const a = await icecreamDetail();
+  console.log(a);
   await client.icecream.deleteMany({});
   await client.allergy.deleteMany({});
 
