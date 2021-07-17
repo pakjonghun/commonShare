@@ -14,6 +14,8 @@ app.use("/menu", menuRouter);
 app.use("/api", globalRouter);
 app.use("/about", aboutRouter);
 
+const port = process.env.PORT || 4000;
+
 const getData = async () => {
   await client.icecream.deleteMany({});
   await client.allergy.deleteMany({});
@@ -59,7 +61,7 @@ const getData = async () => {
     }
   }
 
-  console.log("server is running on 4000");
+  console.log(`Server is running on ${port}`);
 };
 
-app.listen(4000, () => getData());
+app.listen(port, () => getData());
