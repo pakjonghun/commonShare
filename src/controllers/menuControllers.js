@@ -60,10 +60,11 @@ export const menuSearch = async (req, res) => {
 export const icecreamDetail = async (req, res) => {
   try {
     const { title } = req.params;
+    const decodedTitle = decodeURIComponent(title);
 
     const data = await client.icecream.findUnique({
       select: selection,
-      where: { title },
+      where: { title: decodedTitle },
     });
     return res.json({ ok: true, data });
   } catch (e) {
