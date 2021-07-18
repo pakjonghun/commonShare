@@ -61,8 +61,25 @@ export const getIcecream = async (url) => {
       .each(() => {
         const text = $(this).find("a").text();
         if (text.includes("#")) {
-          const tempText = text.split("#").pop().slice(0, -1);
-          hashtags.push(tempText);
+          const temp = text
+            .trim()
+            .replace("-", "")
+            .replace(/\n|\t/g, "")
+            .replace("*", "")
+            .split("#");
+
+          const tem = temp.filter((item, index) => index !== 0 && index !== 2);
+          tem.forEach((item) => {
+            hashtags.push(item);
+          });
+          // const t = temp.filter(
+          //   (item, index) =>
+          //     index !== 0 && index !== 2 && index !== temp.length - 1
+          // );
+
+          // console.log(t);
+
+          // const tempText = text.split("#").pop().slice(0, -1);
         }
       });
     icecreams.push({ cate: "icecream", title, imgUrl, hashtags });
