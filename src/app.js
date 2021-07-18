@@ -3,7 +3,12 @@ import express from "express";
 import globalRouter from "./routers/globalRouter";
 import menuRouter from "./routers/menuRouter";
 import aboutRouter from "./routers/aboutRouter";
-import { getIcecream, handleGetEditIcecream, insertIcecream } from "./api";
+import {
+  getIcecream,
+  getInstar,
+  handleGetEditIcecream,
+  insertIcecream,
+} from "./api";
 import client from "./client";
 import cors from "cors";
 import { authMiddleWare } from "./middleWare";
@@ -23,6 +28,7 @@ app.use("/review", aboutRouter);
 const port = process.env.PORT || 4000;
 
 const getData = async () => {
+  // await getInstar();
   await client.icecream.deleteMany({});
   await client.allergy.deleteMany({});
 

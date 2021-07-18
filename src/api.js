@@ -61,25 +61,21 @@ export const getIcecream = async (url) => {
       .each(() => {
         const text = $(this).find("a").text();
         if (text.includes("#")) {
+          // const temp = text.replace("-" && "*" && /\n|\t/g, "").split("#");
+
           const temp = text
-            .trim()
+            .replace("구매", "")
             .replace("-", "")
             .replace(/\n|\t/g, "")
-            .replace("*", "")
             .split("#");
+          const temp2 = temp.filter(
+            (item, index) => index !== 0 && index !== 2
+          );
+          console.log(temp2);
 
-          const tem = temp.filter((item, index) => index !== 0 && index !== 2);
-          tem.forEach((item) => {
+          temp2.forEach((item) => {
             hashtags.push(item);
           });
-          // const t = temp.filter(
-          //   (item, index) =>
-          //     index !== 0 && index !== 2 && index !== temp.length - 1
-          // );
-
-          // console.log(t);
-
-          // const tempText = text.split("#").pop().slice(0, -1);
         }
       });
     icecreams.push({ cate: "icecream", title, imgUrl, hashtags });
@@ -124,15 +120,14 @@ export const handleGetEditIcecream = async () => {
 
 export const getInstar = async () => {
   try {
-    const res = await axios.get("http://www.baskinrobbins.co.kr/");
+    const res = await axios.get("http://www.baskinrobbins.co.kr");
     const $ = cheerio.load(res.data);
-    const bodyList = $(
-      "#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div "
-    ).children("div");
+    const bodyList = $("#contents").children("div");
 
-    bodyList.each((index, item) => {});
+    bodyList.each((index, item) => {
+      console.log(index);
+    });
 
-    // console.log(bodyList);
     // console.log(bodyList.find("div > div > div").children("img").length);
 
     // bodyList.each((index, item) => {
