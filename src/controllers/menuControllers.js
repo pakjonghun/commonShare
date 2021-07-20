@@ -20,6 +20,8 @@ export const menuSearch = async (req, res) => {
     const { keyword, hashtag, select = [], page } = req.body;
     let data;
 
+    
+
     if (hashtag) {
       data = await client.icecream.findMany({
         take: 7,

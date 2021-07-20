@@ -71,7 +71,6 @@ export const getIcecream = async (url) => {
           const temp2 = temp.filter(
             (item, index) => index !== 0 && index !== 2
           );
-          console.log(temp2);
 
           temp2.forEach((item) => {
             hashtags.push(item);
