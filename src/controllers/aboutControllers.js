@@ -99,7 +99,7 @@ export const reviewDelete = async (req, res) => {
   try {
     const review = await client.notice.count({ where: { id: Number(id) } });
     if (!review) {
-      return res.json({ ok: false, error: "해당 게시글이 존재하기 않습니다." });
+      return res.json({ ok: false, error: "해당 게시글이 존재하지 않습니다." });
     }
 
     await client.notice.delete({ where: { id: Number(id) } });
