@@ -113,3 +113,8 @@ export const eventList = async (req, res) => {
   const eventLists = await client.event.findMany({});
   return res.json(eventLists);
 };
+
+export const getMarkets = async (req, res) => {
+  const markets = await client.markets.findMany({});
+  return res.json(markets);
+};

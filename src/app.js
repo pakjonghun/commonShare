@@ -6,6 +6,7 @@ import aboutRouter from "./routers/aboutRouter";
 import {
   getIcecream,
   getInstar,
+  getMarkets,
   handleGetEditIcecream,
   insertIcecream,
 } from "./api";
@@ -27,11 +28,18 @@ app.use("/review", aboutRouter);
 const port = process.env.PORT || 4000;
 
 const getData = async () => {
+  await client.markets.deleteMany({});
+  await client.hashTag.deleteMany({});
   await client.event.deleteMany({});
   await client.icecream.deleteMany({});
   await client.allergy.deleteMany({});
 
+  const markets = await getMarkets();
   const data = await getInstar();
+
+  for (let i of markets) {
+    await client.markets.create({ data: { ...i } });
+  }
 
   for (let i of data) {
     const { content, time, imgUrl } = i;

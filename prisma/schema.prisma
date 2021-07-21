@@ -77,3 +77,18 @@ model Event {
   time      String
   imgUrl    String
 }
+
+model Markets {
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  operationtime String
+  pointX        Float
+  pointY        Float
+  address1      String
+  address2      String
+  address3      String
+  address       String
+  name          String
+  tel           String
+}
