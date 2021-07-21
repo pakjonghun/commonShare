@@ -68,3 +68,12 @@ model User {
   nickname  String   @unique
   Notice    Notice[]
 }
+
+model Event {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  time      String
+  imgUrl    String
+}

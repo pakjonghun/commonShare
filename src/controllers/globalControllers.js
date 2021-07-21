@@ -108,3 +108,8 @@ export const myPage = async (req, res) => {
 
   return res.json({ ok: true, data: user });
 };
+
+export const eventList = async (req, res) => {
+  const eventLists = await client.event.findMany({});
+  return res.json(eventLists);
+};

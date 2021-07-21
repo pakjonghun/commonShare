@@ -11,7 +11,6 @@ import {
 } from "./api";
 import client from "./client";
 import cors from "cors";
-import { authMiddleWare } from "./middleWare";
 
 const app = express();
 
@@ -28,9 +27,16 @@ app.use("/review", aboutRouter);
 const port = process.env.PORT || 4000;
 
 const getData = async () => {
-  // await getInstar();
+  await client.event.deleteMany({});
   await client.icecream.deleteMany({});
   await client.allergy.deleteMany({});
+
+  const data = await getInstar();
+
+  for (let i of data) {
+    const { content, time, imgUrl } = i;
+    await client.event.create({ data: { content, time, imgUrl } });
+  }
 
   const pages = [
     "http://www.baskinrobbins.co.kr/menu/list.php?top=A",

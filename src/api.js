@@ -1,7 +1,7 @@
-import cheerio from "cheerio";
 import axios from "axios";
 import client from "./client";
-
+import cheerio from "cheerio";
+import request from "request";
 export const insertIcecream = async (cate, title, image, hashTags = []) => {
   const connectOrCreate = [];
   if (hashTags.length) {
@@ -118,23 +118,19 @@ export const handleGetEditIcecream = async () => {
 };
 
 export const getInstar = async () => {
-  try {
-    const res = await axios.get("http://www.baskinrobbins.co.kr");
-    const $ = cheerio.load(res.data);
-    const bodyList = $("#contents").children("div");
+  const res = await axios.get("http://www.baskinrobbins.co.kr/event/list.php");
 
-    bodyList.each((index, item) => {
-      console.log(index);
-    });
+  const $ = cheerio.load(res.data);
+  const body = $("#content > div > div > div.event_list > ul ").children("li");
 
-    // console.log(bodyList.find("div > div > div").children("img").length);
-
-    // bodyList.each((index, item) => {
-    //   console.log(index);
-    //   const className = $(this).find("# div > div > div > img").attr("src");
-    //   console.log(className);
-    // });
-  } catch (e) {
-    console.log(e);
-  }
+  const datas = [];
+  body.each((i, v) => {
+    const url = "http://www.baskinrobbins.co.kr";
+    const content = $(v).find("a > span").text();
+    const time = $(v).find("a > span.period").text();
+    const image = $(v).find("a > figure > img").attr("src");
+    const imgUrl = url + image;
+    datas.push({ content, time, imgUrl });
+  });
+  return datas;
 };
