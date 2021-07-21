@@ -8,7 +8,7 @@ export const reviewList = async (req, res) => {
       take: 7,
       skip: (page - 1) * 7,
       orderBy: {
-        create: -1,
+        create: "desc",
       },
     });
 
