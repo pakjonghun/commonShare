@@ -13,7 +13,16 @@ export const authMiddleWare = (req, res, next) => {
     client.user
       .findUnique({
         where: { nickname },
-        select: { nickname: true, email: true, id: true },
+        select: {
+          nickname: true,
+          email: true,
+          id: true,
+          Like: {
+            select: {
+              IcecreamTitle: true,
+            },
+          },
+        },
       })
       .then((response) => {
         res.locals.user = response;
