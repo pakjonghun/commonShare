@@ -6,6 +6,7 @@ import aboutRouter from "./routers/aboutRouter";
 import {
   getIcecream,
   getInstar,
+  getInstarPic,
   getMarkets,
   handleGetEditIcecream,
   insertIcecream,
@@ -29,6 +30,8 @@ app.use("/review", aboutRouter);
 const port = process.env.PORT || 4000;
 
 const getData = async () => {
+  const instarPic = await getInstarPic();
+
   await client.markets.deleteMany({});
   await client.hashTag.deleteMany({});
   await client.event.deleteMany({});
