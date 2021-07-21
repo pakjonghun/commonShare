@@ -2,6 +2,7 @@ import axios from "axios";
 import client from "./client";
 import cheerio from "cheerio";
 import { htmls } from "../marketsHtmls";
+import { instarHtmls } from "../instarHtmls";
 export const insertIcecream = async (cate, title, image, hashTags = []) => {
   const connectOrCreate = [];
   if (hashTags.length) {
@@ -159,8 +160,9 @@ export const getMarkets = async () => {
 };
 
 export const getInstarPic = async () => {
-  const $ = cheerio.load(instar);
-  const body = $(".item w5");
+  // const $ = cheerio.load(instarHtmls);
+  // const body = $(".item w5");
+  // console.log(body);
   // const db = [];
   // body.each((i, v) => {
   //   const geoLocation = $(v).find("article > a").attr("data-info");
@@ -176,5 +178,5 @@ export const getInstarPic = async () => {
   //     name: data.name,
   //     tel: data.tel,
   //   });
-  return db;
+  // return db;
 };
