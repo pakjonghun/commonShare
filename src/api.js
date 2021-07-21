@@ -1,9 +1,7 @@
 import axios from "axios";
 import client from "./client";
 import cheerio from "cheerio";
-import request from "request";
 import { htmls } from "../marketsHtmls";
-import { data } from "cheerio/lib/api/attributes";
 export const insertIcecream = async (cate, title, image, hashTags = []) => {
   const connectOrCreate = [];
   if (hashTags.length) {
@@ -157,5 +155,27 @@ export const getMarkets = async () => {
       tel: data.tel,
     });
   });
+  return db;
+};
+
+export const getInstarPic = async () => {
+  const $ = cheerio.load(instar);
+  const body = $(".item w5");
+  console.log(body);
+  // const db = [];
+  // body.each((i, v) => {
+  //   const geoLocation = $(v).find("article > a").attr("data-info");
+  //   const data = JSON.parse(geoLocation);
+  //   db.push({
+  //     operationtime: data.operationtime,
+  //     pointX: data.pointX,
+  //     pointY: data.pointY,
+  //     address1: data.address1,
+  //     address2: data.address2,
+  //     address3: data.address3,
+  //     address: data.address,
+  //     name: data.name,
+  //     tel: data.tel,
+  //   });
   return db;
 };
