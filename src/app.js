@@ -18,6 +18,7 @@ const app = express();
 const corsOptions = {
   origin: "http://localhost:3000",
 };
+
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,7 +39,31 @@ const getData = async () => {
   const data = await getInstar();
 
   for (let i of markets) {
-    await client.markets.create({ data: { ...i } });
+    const {
+      operationtime,
+      pointX,
+      pointY,
+      address1,
+      address3,
+      address2,
+      address,
+      name,
+      tel,
+    } = i;
+
+    await client.markets.create({
+      data: {
+        operationtime,
+        pointX,
+        pointY,
+        address1,
+        address3,
+        address2,
+        address,
+        name,
+        tel,
+      },
+    });
   }
 
   for (let i of data) {
