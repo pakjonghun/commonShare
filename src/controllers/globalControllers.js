@@ -118,3 +118,8 @@ export const getMarkets = async (req, res) => {
   const markets = await client.markets.findMany({});
   return res.json(markets);
 };
+
+export const getInstar = async (req, res) => {
+  const instars = await client.instarPic.findMany({});
+  return res.json(instars);
+};

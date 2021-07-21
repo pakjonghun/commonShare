@@ -161,22 +161,13 @@ export const getMarkets = async () => {
 
 export const getInstarPic = async () => {
   const $ = cheerio.load(instarHtmls);
-  const body = $(".item w5");
-  console.log(body);
-  // const db = [];
-  // body.each((i, v) => {
-  //   const geoLocation = $(v).find("article > a").attr("data-info");
-  //   const data = JSON.parse(geoLocation);
-  //   db.push({
-  //     operationtime: data.operationtime,
-  //     pointX: data.pointX,
-  //     pointY: data.pointY,
-  //     address1: data.address1,
-  //     address2: data.address2,
-  //     address3: data.address3,
-  //     address: data.address,
-  //     name: data.name,
-  //     tel: data.tel,
-  //   });
-  // return db;
+  const body = $("#contents > div");
+
+  const db = [];
+
+  body.each((i, v) => {
+    const img = $(v).find("div > div > div > img").attr("src");
+    db.push(img);
+  });
+  return db;
 };

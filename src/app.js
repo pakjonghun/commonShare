@@ -30,16 +30,24 @@ app.use("/review", aboutRouter);
 const port = process.env.PORT || 4000;
 
 const getData = async () => {
-  const instarPic = await getInstarPic();
-
+  await client.instarPic.deleteMany({});
   await client.markets.deleteMany({});
   await client.hashTag.deleteMany({});
   await client.event.deleteMany({});
   await client.icecream.deleteMany({});
   await client.allergy.deleteMany({});
 
+  const instarPic = await getInstarPic();
   const markets = await getMarkets();
   const data = await getInstar();
+
+  for (let i of instarPic) {
+    await client.instarPic.create({
+      data: {
+        url: i,
+      },
+    });
+  }
 
   for (let i of markets) {
     const {
