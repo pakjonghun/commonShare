@@ -97,4 +97,54 @@ export const icecreamList = async (req, res) => {
   }
 };
 
-export const contentSearch = (req, res) => res.json({ ok: true });
+export const icecreamLike = async (req, res) => {
+  const { title } = req.body;
+  const user = res.locals.user;
+
+  try {
+    const amILike = await client.like.findFirst({
+      select: {
+        id: true,
+      },
+      where: {
+        Icecream: {
+          title,
+        },
+        userId: user.id,
+      },
+    });
+
+    if (amILike) {
+      await client.like.delete({
+        where: {
+          id: amILike.id,
+        },
+      });
+    } else {
+      await client.like.create({
+        data: {
+          Icecream: {
+            connect: {
+              title,
+            },
+          },
+          user: {
+            connect: {
+              id: user.id,
+            },
+          },
+        },
+      });
+    }
+
+    res.json({
+      ok: true,
+    });
+  } catch (e) {
+    console.log(e);
+    res.json({
+      ok: false,
+      error: "알수없는 오류가 발생했습니다. 관리자에게 문의하세요.",
+    });
+  }
+};
