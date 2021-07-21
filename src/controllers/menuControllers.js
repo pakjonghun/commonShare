@@ -99,6 +99,7 @@ export const icecreamList = async (req, res) => {
 
 export const icecreamLike = async (req, res) => {
   const { title } = req.body;
+  const decodedTitle = decodeURIComponent(title);
   const user = res.locals.user;
 
   try {
@@ -108,7 +109,7 @@ export const icecreamLike = async (req, res) => {
       },
       where: {
         Icecream: {
-          title,
+          title: decodedTitle,
         },
         userId: user.id,
       },
@@ -125,7 +126,7 @@ export const icecreamLike = async (req, res) => {
         data: {
           Icecream: {
             connect: {
-              title,
+              title: decodedTitle,
             },
           },
           user: {
