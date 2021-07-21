@@ -161,7 +161,6 @@ export const getMarkets = async () => {
 export const getInstarPic = async () => {
   const $ = cheerio.load(instar);
   const body = $(".item w5");
-  console.log(body);
   // const db = [];
   // body.each((i, v) => {
   //   const geoLocation = $(v).find("article > a").attr("data-info");
