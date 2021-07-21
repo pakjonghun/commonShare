@@ -7,6 +7,9 @@ export const reviewList = async (req, res) => {
     const reviews = await client.notice.findMany({
       take: 7,
       skip: (page - 1) * 7,
+      orderBy: {
+        create: -1,
+      },
     });
 
     const count = await client.notice.count({});
