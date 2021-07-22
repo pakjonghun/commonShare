@@ -17,7 +17,10 @@ import cors from "cors";
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: [
+    "http://localhost:3000",
+    "https://beskinrobbins.s3-website.ap-northeast-2.amazonaws.com",
+  ],
 };
 
 app.use(cors(corsOptions));
