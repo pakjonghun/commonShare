@@ -21,6 +21,8 @@ const whiteList = [
   "http://localhost:3000",
   "https://beskinrobbins.s3-website.ap-northeast-2.amazonaws.com",
   "http://beskinrobbins.s3-website.ap-northeast-2.amazonaws.com",
+  "http://beskinrobbins.shop.s3-website.ap-northeast-2.amazonaws.com",
+  "https://beskinrobbins.shop.s3-website.ap-northeast-2.amazonaws.com",
 ];
 
 const corsOptions = {
