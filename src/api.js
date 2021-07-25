@@ -171,3 +171,62 @@ export const getInstarPic = async () => {
   });
   return db;
 };
+
+const encodeKey =
+  "R1YkIepzkxhj6Ouue%2Fo0BcyXRM89NzjOU2baG8hXDjqv7MyVSxspxUBLzUZOJPISnGgxDg8SaIutpCmhB7OE%2Fg%3D%3D";
+const decodeKey =
+  "R1YkIepzkxhj6Ouue/o0BcyXRM89NzjOU2baG8hXDjqv7MyVSxspxUBLzUZOJPISnGgxDg8SaIutpCmhB7OE/g==";
+//인코딩 키를 디코딩 해서 넣으면 작동한다.
+const serviceKey = decodeURIComponent(encodeKey);
+
+const api = axios.create({
+  baseURL: "http://api.visitkorea.or.kr/openapi/service/rest/KorService/",
+  params: {
+    pageNo: 1,
+    serviceKey,
+    MobileOS: "ETC",
+    MobileApp: "testApp",
+  },
+});
+
+// 지역코드 코드 넣기 완료
+// const getDataFun = async () => {
+//   const result1 = await api.get("areaCode");
+//   const items = result1.data.response.body.items.item;
+//   for (let i of items) {
+//     const { code, name, rnum } = i;
+//     await client.areaCode.create({ data: { code, name, rnum } });
+//   }
+// };
+
+// getDataFun();
+
+// 서비스 분류코드
+const getDataFun = async () => {
+  const db = await api.get("detailCommon", {
+    params: {
+      contentId: 2685273,
+      MobileApp: "test",
+      MobileOS: "ETC",
+    },
+  });
+
+  // await client.allLists.update({where:{
+  //   contentid:i.contentid,
+  //   data:{
+  //     overView
+  //   }
+  // }})
+  console.log(db.data.response);
+};
+
+getDataFun();
+// for (let i of areaCode) {
+//   const result1 = await api.get("detailCommon", {
+//     params: {
+//       areaCode: i.code,
+//     },
+//   });
+//   const items = result1.data.response.body.items.item;
+
+// }

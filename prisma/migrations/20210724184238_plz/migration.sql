@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "AllLists" ALTER COLUMN "mapx" SET DATA TYPE TEXT;
